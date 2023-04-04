@@ -16,9 +16,9 @@ export default function Navigation({
   React.useEffect(() => {
     document.querySelector(`.selected`)?.classList.remove("selected");
     document
-      .querySelector(`.project-${currentProjectId}`)
+      .querySelector(`.project-${activeProjectId}`)
       ?.classList.add("selected");
-  }, [currentProjectId]);
+  }, [activeProjectId]);
 
   return (
     <div className="navigation">
@@ -37,7 +37,7 @@ export default function Navigation({
               onClick={() => {
                 onSideNavigationChange("add-new-project");
                 const currentSelected = document.querySelector(
-                  `.project-${currentProjectId}`
+                  `.project-${activeProjectId}`
                 );
                 currentSelected?.scrollIntoView({
                   behavior: "smooth",

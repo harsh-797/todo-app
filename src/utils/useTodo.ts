@@ -15,12 +15,12 @@ function useTodo() {
         else
           return sample
       });
-  const [currentProjectId, setCurrentProjectId] = React.useState<string>("1");
+  const [activeProjectId, setActiveProjectId] = React.useState<string>("1");
 
   const todoAppState = React.useMemo(() => ({
-    currentProjectId,
+    activeProjectId,
     todoList
-  }), [currentProjectId, todoList])
+  }), [activeProjectId, todoList])
 
 
   const handleClick = React.useCallback(
@@ -36,11 +36,11 @@ function useTodo() {
             $merge: { [newProjectId]: newProject },
           });
           setTodoList(newTodoList);
-          setCurrentProjectId(String(newProjectId));
+          setActiveProjectId(String(newProjectId));
           return;
         case "set-current-project":
           if (payload !== undefined) {
-            setCurrentProjectId(payload);
+            setActiveProjectId(payload);
           }
           return;
       }
@@ -55,7 +55,7 @@ function useTodo() {
         case "edit-title":
           if (typeof payload === "string") {
             newTodoList = update(todoList, {
-              [currentProjectId]: { projectTitle: { $set: payload } },
+              [activeProjectId]: { projectTitle: { $set: payload } },
             });
             setTodoList(newTodoList);
           }
@@ -63,14 +63,14 @@ function useTodo() {
         case "change-status":
           if (typeof payload === "string") {
             const currentStatus =
-              todoList[currentProjectId].tasks[payload].status;
+              todoList[activeProjectId].tasks[payload].status;
             const newStatus =
               currentStatus === "inProgress" || currentStatus === "overdue"
                 ? "completed"
                 : "inProgress";
 
             newTodoList = update(todoList, {
-              [currentProjectId]: {
+              [activeProjectId]: {
                 tasks: {
                   [payload]: { status: { $set: newStatus } },
                 },
@@ -82,7 +82,7 @@ function useTodo() {
         case "add-task":
           if (typeof payload === "string") {
             const newTask = {
-              [Object.keys(todoList[currentProjectId].tasks).length + 1]: {
+              [Object.keys(todoList[activeProjectId].tasks).length + 1]: {
                 title: payload,
                 description: "Add description",
                 due: new Date(),
@@ -90,7 +90,7 @@ function useTodo() {
               },
             };
             newTodoList = update(todoList, {
-              [currentProjectId]: {
+              [activeProjectId]: {
                 tasks: {
                   $merge: { ...newTask },
                 },
@@ -102,7 +102,7 @@ function useTodo() {
         case "edit-task-details":
           if (typeof payload !== "string") {
             newTodoList = update(todoList, {
-              [currentProjectId]: {
+              [activeProjectId]: {
                 tasks: {
                   [payload.taskId]: { $apply: (arg) => payload.task },
                 },
@@ -113,7 +113,7 @@ function useTodo() {
           return;
       }
     },
-    [currentProjectId, todoList]
+    [activeProjectId, todoList]
   );
 
   React.useEffect(() => {

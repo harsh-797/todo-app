@@ -17,13 +17,13 @@ export default function EditorPane({
   return (
     <div className="main">
       <EditableHeader
-        key={projectId}
+        key={activeProjectId}
         background="light"
         size="large"
         editable={true}
         onChange={onEditorPaneChange}
       >
-        {project.projectTitle}
+        {activeProject.projectTitle}
       </EditableHeader>
 
       <section className="tasks-wrapper">
@@ -44,14 +44,14 @@ export default function EditorPane({
           </Button>
         </div>
         <ul className="tasks-list">
-          {Object.keys(project.tasks).map((taskId) => {
-            if (Number(taskId) !== Object.keys(project.tasks).length) {
+          {Object.keys(activeProject.tasks).map((taskId) => {
+            if (Number(taskId) !== Object.keys(activeProject.tasks).length) {
               return (
                 // <div>
                 <li key={taskId}>
                   <Task
                     taskId={taskId}
-                    taskDetails={project.tasks[taskId]}
+                    taskDetails={activeProject.tasks[taskId]}
                     onEditorPaneChange={onEditorPaneChange}
                   />
                   <div className="line-to-separate"></div>
@@ -63,7 +63,7 @@ export default function EditorPane({
               <li key={taskId}>
                 <Task
                   taskId={taskId}
-                  taskDetails={project.tasks[taskId]}
+                  taskDetails={activeProject.tasks[taskId]}
                   onEditorPaneChange={onEditorPaneChange}
                 />
               </li>

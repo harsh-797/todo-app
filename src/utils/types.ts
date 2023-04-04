@@ -25,7 +25,7 @@ export type ProjectsList = {
 
 export type NavigationProps = {
     projectsList: ProjectsList,
-    currentProjectId: string,
+    activeProjectId: string,
     onSideNavigationChange: (action: string, payload?: string) => void
 };
 
@@ -55,5 +55,5 @@ export type ButtonProps = {
 export type TaskProps = {
     taskId: string,
     taskDetails: TaskType,
-    handleChange: (action: string, payload: string | { taskId: string; task: TaskType }) => void
+    onEditorPaneChange: (action: string, payload: string | { taskId: string; task: TaskType }) => void
 }

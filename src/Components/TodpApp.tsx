@@ -9,25 +9,25 @@ import { getProjectsList, getCurrentProject } from "../utils";
 export default function TodoApp() {
   const {
     todoAppState,
-    handleChange: onSideNavigationChange,
-    handleClick: onEditorPaneChange,
+    handleClick: onSideNavigationChange,
+    handleChange: onEditorPaneChange,
   } = useTodo();
 
   const projectsList = getProjectsList(todoAppState.todoList);
   const project = getCurrentProject(
     todoAppState.todoList,
-    todoAppState.currentProjectId
+    todoAppState.activeProjectId
   );
 
   return (
     <div className="todo-app">
       <Navigation
         projectsList={projectsList}
-        currentProjectId={todoAppState.currentProjectId}
+        activeProjectId={todoAppState.activeProjectId}
         onSideNavigationChange={onSideNavigationChange}
       />
       <EditorPane
-        activeProjectId={todoAppState.currentProjectId}
+        activeProjectId={todoAppState.activeProjectId}
         activeProject={project}
         onEditorPaneChange={onEditorPaneChange}
       />

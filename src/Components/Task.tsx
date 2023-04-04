@@ -10,7 +10,11 @@ import Button from "./Button";
 
 import { TaskProps, TaskType } from "../utils/types";
 
-export default function Task({ taskId, taskDetails, handleChange }: TaskProps) {
+export default function Task({
+  taskId,
+  taskDetails,
+  onEditorPaneChange,
+}: TaskProps) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -20,7 +24,7 @@ export default function Task({ taskId, taskDetails, handleChange }: TaskProps) {
           variant="primary-button"
           size="large"
           onClick={() => {
-            handleChange("change-status", taskId);
+            onEditorPaneChange("change-status", taskId);
           }}
         >
           {taskDetails.status === "completed" ? (
@@ -65,7 +69,7 @@ export default function Task({ taskId, taskDetails, handleChange }: TaskProps) {
                 taskId: taskId,
                 task: updatedTaskDetails,
               };
-              handleChange("edit-task-details", payload);
+              onEditorPaneChange("edit-task-details", payload);
               setOpen(!open);
             }}
           >
