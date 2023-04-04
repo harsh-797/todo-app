@@ -3,7 +3,7 @@ import React from "react";
 import Navigation from "./Navigation";
 import EditorPane from "./EditorPane";
 
-import { useTodo } from "../utils/useTodo";
+import { useTodoState } from "../utils/useTodoState";
 import { getProjectsList, getCurrentProject } from "../utils";
 
 export default function TodoApp() {
@@ -11,10 +11,10 @@ export default function TodoApp() {
     todoAppState,
     handleClick: onSideNavigationChange,
     handleChange: onEditorPaneChange,
-  } = useTodo();
+  } = useTodoState();
 
   const projectsList = getProjectsList(todoAppState.todoList);
-  const project = getCurrentProject(
+  const activeProject = getCurrentProject(
     todoAppState.todoList,
     todoAppState.activeProjectId
   );
@@ -28,7 +28,7 @@ export default function TodoApp() {
       />
       <EditorPane
         activeProjectId={todoAppState.activeProjectId}
-        activeProject={project}
+        activeProject={activeProject}
         onEditorPaneChange={onEditorPaneChange}
       />
     </div>

@@ -16,7 +16,7 @@ export default function EditorPane({
 
   return (
     <div className="main">
-      <EditableHeader
+      {/* <EditableHeader
         key={activeProjectId}
         background="light"
         size="large"
@@ -24,13 +24,23 @@ export default function EditorPane({
         onChange={onEditorPaneChange}
       >
         {activeProject.projectTitle}
-      </EditableHeader>
+      </EditableHeader> */}
+
+      <input
+        style={{ cursor: "pointer" }}
+        className={`large-heading light-background-heading`}
+        onChange={(event) =>
+          onEditorPaneChange("edit-title", event.target.value)
+        }
+        value={activeProject.projectTitle}
+      ></input>
 
       <section className="tasks-wrapper">
         <div className="add-item-of-type">
-          <EditableHeader background="light" size="small" editable={false}>
+          {/* <EditableHeader background="light" size="small" editable={false}>
             Tasks
-          </EditableHeader>
+          </EditableHeader> */}
+          <h3 className={`small-heading light-background-heading`}>Tasks</h3>
           <Button
             variant="secondary-button"
             size="medium"

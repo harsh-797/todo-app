@@ -1,8 +1,8 @@
 import React from "react";
+import { BuildCircle, Add } from "@mui/icons-material";
 
 import Button from "./Button";
 import EditableHeader from "./EditableHeader";
-import { BuildCircle, Add } from "@mui/icons-material";
 
 import { NavigationProps } from "../utils/types";
 
@@ -22,15 +22,24 @@ export default function Navigation({
 
   return (
     <div className="navigation">
-      <EditableHeader background="dark" size="large" editable={false}>
+      <h1 className={`large-heading dark-background-heading`}>Todo</h1>
+      {/* <EditableHeader background="dark" size="large" editable={false}>
         Todo
-      </EditableHeader>
+      </EditableHeader> */}
       <section className="projects">
         <div className="wrapper">
           <div className="add-item-of-type">
-            <EditableHeader customColor="#717ecc" size="small" editable={false}>
+            {/* <EditableHeader customColor="#717ecc" size="small" editable={false}>
               Projects
-            </EditableHeader>
+            </EditableHeader> */}
+            <h3
+              style={{
+                color: "#717ecc",
+              }}
+              className={`small-heading`}
+            >
+              Projects
+            </h3>
             <Button
               variant="primary-button"
               size="medium"
