@@ -47,6 +47,7 @@ export default function Task({
       {open && (
         <section className="each-task-details">
           <form
+            className="task-details-form"
             onSubmit={(event: React.SyntheticEvent) => {
               event.preventDefault();
               let updatedTaskDetails: TaskType = { ...taskDetails };
@@ -54,6 +55,7 @@ export default function Task({
               const arrElements = Object.entries(
                 (event.target as HTMLFormElement).elements
               );
+              console.log(arrElements);
               arrElements.forEach((e) => {
                 if (Number(e[0]) >= 0) {
                   const key: keyof TaskType = (e[1] as HTMLInputElement)
@@ -73,41 +75,46 @@ export default function Task({
               setOpen(!open);
             }}
           >
-            <label htmlFor="title">Title: </label>
-            <br></br>
-            <input id="title" name="title" defaultValue={taskDetails.title} />
-            <br></br>
-            <br></br>
-            <label htmlFor="description">Description: </label>
-            <br></br>
-            <input
-              id="description"
-              name="description"
-              defaultValue={taskDetails.description}
-            />
-            <br></br>
-            <br></br>
-            <label htmlFor="due">Due: </label>
-            <br></br>
-            <input id="due" name="due" defaultValue={String(taskDetails.due)} />
-            <br></br>
-            <br></br>
-            <label htmlFor="status">Status: </label>
-            <br></br>
-            <input
-              id="status"
-              name="status"
-              value={taskDetails.status}
-              disabled
-            />
-            <br></br>
-            <span>
+            <span style={{ gridArea: "title" }}>
+              <label htmlFor="title">Title: </label>
+              <input id="title" name="title" defaultValue={taskDetails.title} />
+            </span>
+
+            <span style={{ gridArea: "description" }}>
+              <label htmlFor="description">Description: </label>
+              <textarea
+                id="description"
+                name="description"
+                style={{ height: "80%", width: "90%" }}
+                defaultValue={taskDetails.description}
+              />
+            </span>
+
+            <span style={{ gridArea: "due" }}>
+              <label htmlFor="due">Due: </label>
+              <input
+                id="due"
+                name="due"
+                type="date"
+                defaultValue={String(taskDetails.due)}
+              />
+            </span>
+
+            <span style={{ gridArea: "status" }}>
+              <label htmlFor="status">Status: </label>
+              <input
+                id="status"
+                name="status"
+                value={taskDetails.status}
+                disabled
+              />
+            </span>
+            <span style={{ gridArea: "submit", margin: "auto" }}>
               <Button size="large" variant="secondary-button" type="submit">
                 submit
-                {/* <Save fontSize="large" /> */}
               </Button>
+              <br></br>
             </span>
-            <br></br>
           </form>
         </section>
       )}

@@ -27,7 +27,7 @@ export default function EditorPane({
       </EditableHeader> */}
 
       <input
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", width: "80%", textOverflow: "ellipsis" }}
         className={`large-heading light-background-heading`}
         onChange={(event) =>
           onEditorPaneChange("edit-title", event.target.value)
